@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <title>Diagrama de Fluxo de Telas</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="mermaid.js"></script>
+</head>
+<body>
+    <h1 class="chart-title">Diagrama de Fluxo de Telas</h1>
+    <pre class="mermaid">
+        flowchart TD 
+
+        t_login[Tela de Login]
+        t_login --> |fa:fa-user login?| t_principal[Tela Principal]
+        t_login --> |fa:fa-key criar conta?| t_cadastro[Tela Cadastre-se] --> t_login
+        t_login --> |fa:fa-lock esqueceu a senha?| t_redefinir_senha[Tela Redefinir Senha] --> t_login
+        
+        t_principal --> f_historias[/Feed Histórias de Sucesso/]
+        t_principal --> |fa:fa-camera escanear material| t_info_materiais[Tela Informações Material]
+        t_principal --> |fa:fa-map mapa da poluição| t_mapa_poluicao[Tela Mapa da Poluição]
+        t_principal --> |fa:fa-users grupos de ação| t_grupo_acao[Tela Grupos de Ação]
+        t_principal --> |fa:fa-gear configurações|m_config[Menu Configurações]
+    
+        t_info_materiais --> |fa:fa-trash descartar?| t_descarte[Mapa Locais para Descarte] --> |fa:fa-trash-arrow-up material foi descartado?| a[[fa:fa-clock aguardar confirmação]] --> d_resolver
+        t_info_materiais --> |fa:fa-gavel denunciar?| t_info_denuncia[Tela Informações Denúncia] -->|fa:fa-check submeter| t_mapa_poluicao
+        t_info_materiais --> |fa:fa-recycle reciclar?| t_reciclarte[Tela ReciclArte]
+    
+        t_mapa_poluicao --> t_minhas_denuncias[Minhas Denuncias] --> d_resolver{denuncia resolvida?} --> md_recompensa>fa:fa-medal Receber Recompensa]
+        t_mapa_poluicao --> |fa:fa-check apoiar denuncia?|b_apoiar(Apoiar Denúncias) --> d_resolver{Problema resolvido?}
+        
+        t_grupo_acao --> |fa:fa-bolt criar grupo?|t_criar_grupo[Criar Grupo]--> |fa:fa-bolt criar ação?|t_criar_acao[Criar Ação] --> d_resolver
+        t_grupo_acao --> |fa:fa-search encontrar grupo?|t_encontrar_grupo[Participar do Grupo]--> |fa:fa-search procurar ação?|t_procurar_acao[Participar da Ação] --> d_resolver
+    
+        t_reciclarte --> |fa:fa-lightbulb fa:fa-camera fa:fa-list compartilhar ideias|t_dicas(Compartilhar Dicas) --> t_lista_dicas
+        t_reciclarte --> t_lista_dicas[Tela Ideias Comunidade]
+        
+        t_lista_dicas --> |fa:fa-thumbs-up recebeu upvote?|md_recompensa
+    
+        d_resolver --> |fa:fa-bullhorn compartilhar sucesso?|f_historias
+
+        %%Stylizing configs
+            linkStyle default stroke:black,stroke-width:1px,color:gray;
+
+    </pre>
+   <footer class="footer">&COPY;2024 Squad 59 - FICR - Porto Digital</footer>
+</body>
+</html>
