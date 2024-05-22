@@ -20,7 +20,7 @@
         t_principal --> f_historias[/Feed Histórias de Sucesso/]
         t_principal --> |fa:fa-camera escanear material| t_info_materiais[Tela Informações Material]
         t_principal --> |fa:fa-map mapa da poluição| t_mapa_poluicao[Tela Mapa da Poluição]
-        t_principal --> |fa:fa-users grupos de ação| t_grupo_acao[Tela Grupos de Ação]
+        t_principal --> |fa:fa-users campanhas| t_campanhas[Tela Campanhas]
         t_principal --> |fa:fa-gear configurações|m_config[Menu Configurações]
     
         t_info_materiais --> |fa:fa-trash descartar?| t_descarte[Mapa Locais para Descarte] --> |fa:fa-trash-arrow-up material foi descartado?| a[[fa:fa-clock aguardar confirmação]] --> d_resolver
@@ -30,18 +30,24 @@
         t_mapa_poluicao --> t_minhas_denuncias[Minhas Denuncias] --> d_resolver{denuncia resolvida?} --> md_recompensa>fa:fa-medal Receber Recompensa]
         t_mapa_poluicao --> |fa:fa-check apoiar denuncia?|b_apoiar(Apoiar Denúncias) --> d_resolver{Problema resolvido?}
         
-        t_grupo_acao --> |fa:fa-bolt criar grupo?|t_criar_grupo[Criar Grupo]--> |fa:fa-bolt criar ação?|t_criar_acao[Criar Ação] --> d_resolver
-        t_grupo_acao --> |fa:fa-search encontrar grupo?|t_encontrar_grupo[Participar do Grupo]--> |fa:fa-search procurar ação?|t_procurar_acao[Participar da Ação] --> d_resolver
+        t_campanhas --> |fa:fa-bolt criar campanha?|t_criar_campanha[Criar Campanha] --> d_resolver
+        t_campanhas --> |fa:fa-search buscar campanha?|t_buscar_campanha[Buscar Campanha]--> d_resolver
     
-        t_reciclarte --> |fa:fa-lightbulb fa:fa-camera fa:fa-list compartilhar ideias|t_dicas(Compartilhar Dicas) --> t_lista_dicas
-        t_reciclarte --> t_lista_dicas[Tela Ideias Comunidade]
-        
-        t_lista_dicas --> |fa:fa-thumbs-up recebeu upvote?|md_recompensa
+        t_reciclarte --> |fa:fa-lightbulb fa:fa-camera fa:fa-list compartilhar ideias|t_dicas(Compartilhar Dicas) --> |fa:fa-thumbs-up recebeu upvote?|md_recompensa
     
         d_resolver --> |fa:fa-bullhorn compartilhar sucesso?|f_historias
 
         %%Stylizing configs
+            classDef t_principal fill:;
+            classDef t_main_functions fill:;
+            classDef b_button fill:;
+            classDef f_feed fill:;
+            classDef f_trophy fill:;
+            
+            class t_principal principal;
+
             linkStyle default stroke:black,stroke-width:1px,color:gray;
+
 
     </pre>
    <footer class="footer">&COPY;2024 Squad 59 - FICR - Porto Digital</footer>
